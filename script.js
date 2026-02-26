@@ -23,7 +23,6 @@ function createCanvas(size) {
         pixel.addEventListener("mouseenter", () => {
             pixel.style.background = "black";
             pixel.style.opacity = opacity + "%";
-            opacity += 10;
         });
     })
 }
