@@ -33,6 +33,20 @@ function createCanvas(size) {
         pixel.addEventListener("mouseenter", () => {
             let opacity = 
             window.getComputedStyle(pixel, null).getPropertyValue("opacity");
+            let color = 
+            window.getComputedStyle(pixel, null).getPropertyValue("background-color");
+            let colorArray = [];
+
+            if (color == "rgb(255, 255, 255)") {
+                for (let i = 0; i < 3; i++) {
+                    let colorElement = Math.floor(Math.random() * 255);
+                    colorArray.push(colorElement);
+                }
+                
+                color = colorArray.join(", ");
+                pixel.style.background = `rgb(${color})`;
+
+            }
 
             switch (opacity) {
                 case "0%":
@@ -44,11 +58,8 @@ function createCanvas(size) {
                 default:
                     opacity = Number(opacity.slice(0, 3) * 100);
             }
-
-            pixel.style.background = "black";
+            
             pixel.style.opacity = (opacity + 10) + "%";
-            console.log(opacity);
-
         });
     })
 }
