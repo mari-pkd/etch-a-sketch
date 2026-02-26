@@ -1,9 +1,21 @@
 const canvas = document.querySelector(".canvas");
+const ui = document.querySelector(".ui");
+
+let canvasSize = 16;
 
 //for editing canvas size in CSS:
 let canvasSide = 
 window.getComputedStyle(canvas, null).getPropertyValue("height");
 canvasSide = Number(canvasSide.slice(0, 3));
+
+function clearCanvas() {
+    let pixel = canvas.lastElementChild;
+    while (pixel) {
+        canvas.removeChild(pixel);
+        pixel = canvas.lastElementChild;
+    }
+    createCanvas(canvasSize);
+}
 
 function createCanvas(size) {
     let elementNumber = size ** 2;
@@ -41,4 +53,20 @@ function createCanvas(size) {
     })
 }
 
-createCanvas(16);
+ui.addEventListener("click", (event) => {
+    let target = event.target;
+    
+    switch (target.id) {
+        case "resize":
+            canvasSize = prompt("Enter new canvas size (up to 100): ");
+            if (canvasSize > 100) alert("Can't create a canvas this big!");
+            else {
+                clearCanvas();
+            }
+            break;
+        case "clear":
+            clearCanvas();
+    }
+})
+
+createCanvas(canvasSize);
