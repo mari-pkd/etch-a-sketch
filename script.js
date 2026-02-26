@@ -70,10 +70,11 @@ ui.addEventListener("click", (event) => {
     switch (target.id) {
         case "resize":
             canvasSize = prompt("Enter new canvas size (up to 100): ");
-            if (canvasSize > 100) alert("Can't create a canvas this big!");
-            else {
+            if (canvasSize > 0 && canvasSize <= 100) {
+                canvasSize = Math.round(canvasSize);
                 clearCanvas();
             }
+            else alert("Can't create this canvas!")
             break;
         case "clear":
             clearCanvas();
